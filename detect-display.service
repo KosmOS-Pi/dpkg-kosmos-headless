@@ -1,0 +1,11 @@
+[Unit]
+Description=Detect HDMI and enable/disable dummy display
+Before=graphical.target
+Wants=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/detect-display
+
+[Install]
+WantedBy=graphical.target

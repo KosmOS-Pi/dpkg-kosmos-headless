@@ -1,0 +1,38 @@
+#!/bin/bash
+
+DUMMY_CONF="/etc/X11/xorg.conf.d/10-dummy.conf"
+DUMMY_DISABLED="/etc/X11/xorg.conf.d/10-dummy.conf.disabled"
+HDMI_STATUS="/sys/class/drm/card1-HDMI-A-1/status"
+
+# simple logging
+log() {
+    echo "[detect-display] $1"
+    logger "[detect-display] $1"
+}
+
+if [ -f "$HDMI_STATUS" ]; then
+    STATUS=$(cat "$HDMI_STATUS")
+    if [ "$STATUS" = "connected" ]; then
+        log "HDMI Monitor connected. Disableing dummy driver."
+        if [ -f "$DUMMY_CONF" ]; then
+            mv "$DUMMY_CONF" "$DUMMY_DISABLED"
+            log "Dummy driver disabled."
+        fi
+    else
+        log "No HDMI monitor connected. Enableing dummy driver."
+        if [ -f "$DUMMY_DISABLED" ]; then
+            mv "$DUMMY_DISABLED" "$DUMMY_CONF"
+            log "Dummy driver enabled."
+        fi
+    fi
+else
+    log "Impossible to retrieve HDMI status. No action was executed."
+fi
+
+# Restart display manager
+#if systemctl is-active --quiet lightdm; then
+#    systemctl restart lightdm
+#else
+#    log "No active display manager found."
+#fi
+

@@ -1,0 +1,17 @@
+Source: kosmos-headless
+Section: misc
+Priority: optional
+Maintainer: Matteo Piscitelli <matteo@matteopiscitelli.it>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://gitbuh.com/KosmOS-Pi/dpkg-kosmos-headless
+Rules-Requires-Root: no
+
+Package: kosmos-headless
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, xserver-xorg-video-dummy
+Suggests: kstars
+Description: Enables X11 dummy video driver if no monitor is connected.
+ Enables X11 dummy video driver if no monitor is connected to ensure a
+ working VNC headless system.
