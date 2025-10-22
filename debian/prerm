@@ -1,9 +1,0 @@
-#! /bin/bash
-
-# prerm script fot kosmos-headless
-
-set -e
-
-systemctl stop detect-display.service
-systemctl disable detect-display.service
-

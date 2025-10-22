@@ -1,9 +1,0 @@
-#! /bin/bash
-
-# postinst script fot kosmos-headless
-
-set -e
-
-systemctl enable detect-display.service
-systemctl start detect-display.service
-

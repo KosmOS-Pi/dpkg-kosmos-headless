@@ -1,3 +1,2 @@
-detect-display.service /lib/systemd/system
 detect-display /usr/bin
 10-dummy.conf.disabled /etc/X11/xorg.conf.d/
