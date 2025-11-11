@@ -1,3 +1,9 @@
+kosmos-headless (1.1-1) bookworm; urgency=medium
+
+  * Add enable/disable via /etc/default/kosmos-headless.
+
+ -- Matteo Piscitelli <matteo@matteopiscitelli.it>  Tue, 11 Nov 2025 11:25:07 +0000
+
 kosmos-headless (1.0-1) bookworm; urgency=medium
 
   * First release.

@@ -1,0 +1,5 @@
+# Default file for kosmos-headless service.
+# Change to ENABLE=no if you want to disable it.
+
+ENABLED=yes
+

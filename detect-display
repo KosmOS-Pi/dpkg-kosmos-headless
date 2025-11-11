@@ -1,5 +1,6 @@
 #!/bin/bash
 
+MYCONF="/etc/default/kosmos-headless"
 DUMMY_CONF="/etc/X11/xorg.conf.d/10-dummy.conf"
 DUMMY_DISABLED="/etc/X11/xorg.conf.d/10-dummy.conf.disabled"
 HDMI_STATUS="/sys/class/drm/card1-HDMI-A-1/status"
@@ -10,16 +11,33 @@ log() {
     logger "[detect-display] $1"
 }
 
+ENABLED=yes
+
+if [ -f "$MYCONF" ]; then
+    # Source config if present
+    source $MYCONF
+fi
+
+if [ "$ENABLED" != "yes" ]; then
+    if [ -f "$DUMMY_CONF" ]; then
+        mv "$DUMMY_CONF" "$DUMMY_DISABLED"
+        log "Dummy driver disabled (by config)."
+    else
+        log "Disabled by config: do nothing."
+    fi
+    exit 0
+fi
+
 if [ -f "$HDMI_STATUS" ]; then
     STATUS=$(cat "$HDMI_STATUS")
     if [ "$STATUS" = "connected" ]; then
-        log "HDMI Monitor connected. Disableing dummy driver."
+        log "HDMI Monitor connected. Disabling dummy driver."
         if [ -f "$DUMMY_CONF" ]; then
             mv "$DUMMY_CONF" "$DUMMY_DISABLED"
             log "Dummy driver disabled."
         fi
     else
-        log "No HDMI monitor connected. Enableing dummy driver."
+        log "No HDMI monitor connected. Enabling dummy driver."
         if [ -f "$DUMMY_DISABLED" ]; then
             mv "$DUMMY_DISABLED" "$DUMMY_CONF"
             log "Dummy driver enabled."
