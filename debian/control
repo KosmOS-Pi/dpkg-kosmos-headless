@@ -10,7 +10,7 @@ Rules-Requires-Root: no
 Package: kosmos-headless
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, xserver-xorg-video-dummy
-Description: Enables X11 dummy video driver if no monitor is connected.
- Enables X11 dummy video driver if no monitor is connected to ensure a
- working VNC headless system.
+Depends: ${misc:Depends}, xserver-xorg-video-dummy, realvnc-vnc-server
+Description: Enables VNC headless system..
+ Enables VNC server. At system start enabled X11 dummy video driver
+ if no monitor is connected to ensure a working VNC headless system.
