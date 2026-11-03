@@ -1,4 +1,4 @@
-kosmos-headless (1.1-2) trixie; urgency=medium
+kosmos-headless (1.1-2~deb13) trixie; urgency=medium
 
   * Add dep to RealVNC server.
 
